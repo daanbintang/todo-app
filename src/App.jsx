@@ -51,26 +51,18 @@ const App = () => {
     });
   };
 
-  const archivedItems = todos.filter((todo) => todo.archived === true);
-  const activedItems = todos.filter((todo) => todo.archived === false);
-
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchTodo(value);
-    filterData(value);
   };
 
-  const filterData = (keyword) => {
-    if (keyword === "") {
-      setTodos(data);
-    } else {
-      const filterItems = todos.filter((todo) =>
-        todo.title.toLowerCase().includes(keyword.toLowerCase())
-      );
-      setTodos(filterItems);
-    }
-  };
+  const filterItems = todos.filter((todo) =>
+    todo.title.toLowerCase().includes(searchTodo.toLowerCase())
+  );
 
+  const archivedItems = filterItems.filter((todo) => todo.archived === true);
+  const activedItems = filterItems.filter((todo) => todo.archived === false);
+  
   return (
     <div className="bg-gradient-to-br from-gray-800 to-slate-900 min-h-screen">
       <Limit limit={limit} titleLength={title.length} />
